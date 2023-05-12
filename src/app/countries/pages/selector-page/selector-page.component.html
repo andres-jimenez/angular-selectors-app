@@ -1,0 +1,44 @@
+<h2 class="ma0">Border Selector</h2>
+<form class="mt3" [formGroup]="borderSelectorForm">
+  <div>
+    <label class="fw5 ml2 mb2">Region:</label>
+    <select formControlName="region">
+      <option value="">Select a region</option>
+      <option *ngFor="let region of regions" [value]="region">
+        {{ region }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mt3" *ngIf="countriesByRegion.length > 0">
+    <label class="fw5 ml2 mb2">Country:</label>
+    <select formControlName="country">
+      <option value="" selected>Select a country</option>
+      <option *ngFor="let country of countriesByRegion" [value]="country.cca3">
+        {{ country.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mt3" *ngIf="bordersByCountry.length > 0">
+    <label class="fw5 ml2 mb2">Border:</label>
+    <select formControlName="border">
+      <option value="" selected>Select a border</option>
+      <option *ngFor="let border of bordersByCountry" [value]="border.cca3">
+        {{ border.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mt3">
+    <button type="submit" [disabled]="borderSelectorForm.invalid">
+      Submit
+    </button>
+  </div>
+</form>
+
+<h3 class="ma0">Form Status</h3>
+<pre class="mt3 pa3">{{ borderSelectorForm.value | json }}</pre>
+<p>
+  Is form valid?: <code>{{ borderSelectorForm.valid }}</code>
+</p>
